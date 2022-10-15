@@ -12,60 +12,71 @@ with open(election_data, newline="") as csvfile:
   csvreader = csv.reader(csvfile, delimiter=',')
   csv_header = next(csvreader)
 
-  #Declaring variables
-  ballot = []
+ # Declaring variables
+  votes = []
   county = []
   candidates = []
+  Charles_Casper_Stockham = []
+  Diana_DeGette = []
+  Raymon_Anthony_Doane = []
+  Charles_Casper_Stockham_votes = 0
+  Diana_DeGette_votes = 0
+  Raymon_Anthony_Doane_votes = 0
 
-  Charles = []
-  Charles_votes = 0
-
-  Diana = []
-  Diana_votes = 0
-
-  Raymon = []
-  Raymon_votes = 0
-
-  #reading data
+ # read each row of data after header
   for row in csvreader:
-    ballot.append(int(row[0]))
+    votes.append(int(row[0]))
     county.append(row[1])
-    candidates.append(row[2])
+    candidates.append(row[2]) 
 
-  #calculate total vote
-  total_votes = (len(ballot))
-  print ("Total Vote:" + str(total_votes))
+  # VOTE COUNT
+  total_votes = (len(votes))
+  print(total_votes)
 
-  #list of candidate who receive vote
+  # Votes by Person
   for candidate in candidates:
+      if candidate == "Charles Casper Stockham":
+        Charles_Casper_Stockham.append(candidates)
+        Charles_Casper_Stockham_votes = len(Charles_Casper_Stockham)
 
-   if candidates == "Charles_casper_Stockham"
-      Charles.append(candidates)
-      Charles_votes = len(Charles)
+      elif candidate == "Diana DeGette":
+        Diana_DeGette.append(candidates)
+        Diana_DeGette_votes = len(Diana_DeGette)
 
-    elif candidates == "Diana_DeGette"
-      Diana.append(candidates)
-      Diana_votes = len(Diana)
-      
-    else:
-      Raymon.append(candidates)
-      Raymon_votes = len(Raymon)
+      else:
+        Raymon_Anthony_Doane.append(candidates)
+        Raymon_Anthony_Doane_votes = len(Raymon_Anthony_Doane)
 
-  #percentage of each vote
-  Charles_percent = ((((Charles_votes/total_votes)*100)/3))
-  Diana_percent = ((((Diana_votes/total_votes)*100)/3))
-  Raymon_percent = ((((Raymon_votes/total_votes)*100)/3))
+  print(Charles_Casper_Stockham_votes)
+  print(Diana_DeGette_votes)
+  print(Raymon_Anthony_Doane_votes)
 
-  print ("...................................")
+  # Percentages
+  Charles_Casper_Stockham_percent = round(((Charles_Casper_Stockham_votes / total_votes) * 100), 3)
+  Diana_DeGette_percent = round(((Diana_DeGette_votes / total_votes) * 100), 3)
+  Raymon_Anthony_Doane_percent = round(((Raymon_Anthony_Doane_votes / total_votes) * 100), 3)
+  print(Charles_Casper_Stockham_percent)
+  print(Diana_DeGette_percent)
+  print(Raymon_Anthony_Doane_percent)
 
-  print ("Charles Casper Stockham:" + str(Charles_percent) + str(Charles_votes))
-  print ("Diana DeGette:" + str(Diana_percent) + str(Diana_votes))
-  print ("Raymon Anthony Doane:" + str(Raymon_percent) + str(Raymon_votes))
-  print ("...................................")
+  # Winner 
+  if Charles_Casper_Stockham_percent > max(Diana_DeGette_percent, Raymon_Anthony_Doane_percent):
+    winner = "Charles_Casper_Stockham"
 
-  print ("Winner:")
+  elif Diana_DeGette_percent > max(Charles_Casper_Stockham_percent, Raymon_Anthony_Doane_percent):
+    winner = "Diana_DeGette"  
 
+  else:
+    winner = "Raymon_Anthony_Doane"
 
-      
-
-
+  # Print Statements
+  print(f'''Election Results
+-----------------------------------
+Total Votes: {total_votes}
+-----------------------------------
+Charles_Casper_Stockham_percent: {Charles_Casper_Stockham_percent}% ({Charles_Casper_Stockham_votes})
+Diana_DeGette: {Diana_DeGette_percent}% ({Diana_DeGette_votes})
+Raymon_Anthony_Doane: {Raymon_Anthony_Doane_percent}% ({Raymon_Anthony_Doane_votes})
+-----------------------------------
+Winner: {winner}
+-----------------------------------''')
