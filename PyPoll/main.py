@@ -1,5 +1,3 @@
-print ("Election Results")
-print ("...................................")
 
 import os
 import csv 
@@ -31,7 +29,7 @@ with open(election_data, newline="") as csvfile:
 
   # VOTE COUNT
   total_votes = (len(votes))
-  print(total_votes)
+  #print(total_votes)
 
   # Votes by Person
   for candidate in candidates:
@@ -47,17 +45,17 @@ with open(election_data, newline="") as csvfile:
         Raymon_Anthony_Doane.append(candidates)
         Raymon_Anthony_Doane_votes = len(Raymon_Anthony_Doane)
 
-  print(Charles_Casper_Stockham_votes)
-  print(Diana_DeGette_votes)
-  print(Raymon_Anthony_Doane_votes)
+  #print(Charles_Casper_Stockham_votes)
+  #print(Diana_DeGette_votes)
+  #print(Raymon_Anthony_Doane_votes)
 
   # Percentages
   Charles_Casper_Stockham_percent = round(((Charles_Casper_Stockham_votes / total_votes) * 100), 3)
   Diana_DeGette_percent = round(((Diana_DeGette_votes / total_votes) * 100), 3)
   Raymon_Anthony_Doane_percent = round(((Raymon_Anthony_Doane_votes / total_votes) * 100), 3)
-  print(Charles_Casper_Stockham_percent)
-  print(Diana_DeGette_percent)
-  print(Raymon_Anthony_Doane_percent)
+  #print(Charles_Casper_Stockham_percent)
+  #print(Diana_DeGette_percent)
+  #print(Raymon_Anthony_Doane_percent)
 
   # Winner 
   if Charles_Casper_Stockham_percent > max(Diana_DeGette_percent, Raymon_Anthony_Doane_percent):
@@ -80,3 +78,19 @@ Raymon_Anthony_Doane: {Raymon_Anthony_Doane_percent}% ({Raymon_Anthony_Doane_vot
 -----------------------------------
 Winner: {winner}
 -----------------------------------''')
+
+
+# Output to a text file
+file = open("output.txt","w")
+file.write(f'''Election Results
+-----------------------------------
+Total Votes: {total_votes}
+-----------------------------------
+Charles_Casper_Stockham_percent: {Charles_Casper_Stockham_percent}% ({Charles_Casper_Stockham_votes})
+Diana_DeGette: {Diana_DeGette_percent}% ({Diana_DeGette_votes})
+Raymon_Anthony_Doane: {Raymon_Anthony_Doane_percent}% ({Raymon_Anthony_Doane_votes})
+-----------------------------------
+Winner: {winner}
+-----------------------------------''')
+
+file.close()
